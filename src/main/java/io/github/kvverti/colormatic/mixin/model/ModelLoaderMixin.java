@@ -39,6 +39,7 @@ import net.minecraft.client.render.model.ModelLoader;
 import net.minecraft.client.util.ModelIdentifier;
 import net.minecraft.command.argument.BlockStateArgumentType;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.collection.IdList;
 import net.minecraft.util.registry.Registry;
 
 @Mixin(ModelLoader.class)

@@ -44,6 +44,7 @@ import net.minecraft.client.render.CameraSubmersionType;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.fluid.Fluids;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.biome.Biome;
@@ -230,15 +231,16 @@ public abstract class BackgroundRendererMixin {
     /**
      * When clear void is enabled, prevent black fog when in the void.
      */
-    @ModifyVariable(
-        method = "render",
-        at = @At(value = "STORE", ordinal = 0),
-        ordinal = 0
-    )
-    private static double modifyVoidColor(double scale) {
-        if(Colormatic.config().clearVoid) {
-            scale = 1.0;
-        }
-        return scale;
-    }
+    // TODO: Fix later
+//    @ModifyVariable(
+//        method = "render",
+//        at = @At(value = "STORE", ordinal = 0),
+//        ordinal = 0
+//    )
+//    private static float modifyVoidColor(float scale) {
+//        if (Colormatic.config().clearVoid) {
+//            scale = 1.0f;
+//        }
+//        return scale;
+//    }
 }

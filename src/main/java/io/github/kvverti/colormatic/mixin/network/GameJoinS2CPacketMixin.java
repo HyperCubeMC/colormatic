@@ -21,6 +21,7 @@
  */
 package io.github.kvverti.colormatic.mixin.network;
 
+import net.minecraft.util.registry.RegistryEntry;
 import org.objectweb.asm.Opcodes;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -41,31 +42,31 @@ public abstract class GameJoinS2CPacketMixin {
     @Final
     @Mutable
     @Shadow
-    private DimensionType dimensionType;
+    private RegistryEntry<DimensionType> dimensionType;
 
     @Final
     @Shadow
-    private DynamicRegistryManager.Impl registryManager;
+    private DynamicRegistryManager.Immutable registryManager;
 
     /**
      * We loop through and make the instances identical since we want to be able to get the ID for a given dimension
      * type.
      */
     @Inject(
-        method = "<init>(IZLnet/minecraft/world/GameMode;Lnet/minecraft/world/GameMode;Ljava/util/Set;Lnet/minecraft/util/registry/DynamicRegistryManager$Impl;Lnet/minecraft/world/dimension/DimensionType;Lnet/minecraft/util/registry/RegistryKey;JIIIZZZZ)V",
+        method = "<init>(IZLnet/minecraft/world/GameMode;Lnet/minecraft/world/GameMode;Ljava/util/Set;Lnet/minecraft/util/registry/DynamicRegistryManager$Immutable;Lnet/minecraft/util/registry/RegistryEntry;Lnet/minecraft/util/registry/RegistryKey;JIIIZZZZ)V",
         at = @At(
             value = "FIELD",
-            target = "Lnet/minecraft/network/packet/s2c/play/GameJoinS2CPacket;dimensionType:Lnet/minecraft/world/dimension/DimensionType;",
+            target = "Lnet/minecraft/network/packet/s2c/play/GameJoinS2CPacket;dimensionType:Lnet/minecraft/util/registry/RegistryEntry;",
             ordinal = 0,
             opcode = Opcodes.PUTFIELD,
             shift = At.Shift.AFTER
         )
     )
     private void fixDimensionType(CallbackInfo info) {
-        DimensionType target = this.dimensionType;
+        RegistryEntry<DimensionType> target = this.dimensionType;
         Registry<DimensionType> registry = this.registryManager.get(Registry.DIMENSION_TYPE_KEY);
-        for(DimensionType dimType : registry) {
-            if(dimType.equals(target)) {
+        for (RegistryEntry<DimensionType> dimType : registry.getIndexedEntries()) {
+            if (dimType.equals(target)) {
                 this.dimensionType = dimType;
                 break;
             }

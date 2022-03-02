@@ -21,6 +21,7 @@
  */
 package io.github.kvverti.colormatic.mixin.network;
 
+import net.minecraft.util.registry.RegistryEntry;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -35,7 +36,7 @@ import net.minecraft.world.dimension.DimensionType;
 public abstract class ClientPlayNetworkHandlerMixin {
 
     @Shadow
-    private DynamicRegistryManager registryManager;
+    private DynamicRegistryManager.Immutable registryManager;
 
     /**
      * We loop through and make the instances identical since we want to be able to get the ID for a given dimension
@@ -49,10 +50,10 @@ public abstract class ClientPlayNetworkHandlerMixin {
             ordinal = 0
         )
     )
-    private DimensionType fixDimensionTypeOnPlayerRespawn(DimensionType target) {
+    private RegistryEntry<DimensionType> fixDimensionTypeOnPlayerRespawn(RegistryEntry<DimensionType> target) {
         Registry<DimensionType> registry = this.registryManager.get(Registry.DIMENSION_TYPE_KEY);
-        for(DimensionType dimType : registry) {
-            if(dimType.equals(target)) {
+        for (RegistryEntry<DimensionType> dimType : registry.getIndexedEntries()) {
+            if (dimType.equals(target)) {
                 return dimType;
             }
         }

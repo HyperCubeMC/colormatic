@@ -33,6 +33,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import net.minecraft.client.render.model.BakedModel;
 import net.minecraft.client.render.model.json.JsonUnbakedModel;
 import net.minecraft.client.render.model.json.ModelElement;
+import net.minecraft.client.render.model.json.ModelElementFace;
 
 @Mixin(JsonUnbakedModel.class)
 public abstract class JsonUnbakedModelMixin {

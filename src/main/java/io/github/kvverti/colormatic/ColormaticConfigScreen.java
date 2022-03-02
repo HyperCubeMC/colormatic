@@ -21,10 +21,6 @@
  */
 package io.github.kvverti.colormatic;
 
-import java.util.List;
-
-import org.jetbrains.annotations.Nullable;
-
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.screen.ScreenTexts;
 import net.minecraft.client.gui.widget.ButtonWidget;
@@ -36,6 +32,9 @@ import net.minecraft.text.LiteralText;
 import net.minecraft.text.OrderedText;
 import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
+import org.jetbrains.annotations.Nullable;
+
+import java.util.List;
 
 public class ColormaticConfigScreen extends Screen {
 
@@ -121,7 +120,7 @@ public class ColormaticConfigScreen extends Screen {
             STANDARD_WIDTH,
             STANDARD_HEIGHT,
             ScreenTexts.DONE,
-            button -> this.onClose()
+            button -> this.close()
         ));
     }
 
@@ -158,7 +157,7 @@ public class ColormaticConfigScreen extends Screen {
     }
 
     @Override
-    public void onClose() {
+    public void close() {
         ColormaticConfigController.persist(config);
         this.client.setScreen(parent);
     }

@@ -23,6 +23,7 @@ package io.github.kvverti.colormatic.mixin.world;
 
 import io.github.kvverti.colormatic.Colormatic;
 import io.github.kvverti.colormatic.colormap.BiomeColormaps;
+import io.github.kvverti.colormatic.colormap.ColormaticResolver;
 import io.github.kvverti.colormatic.colormap.ExtendedColorResolver;
 import it.unimi.dsi.fastutil.objects.Object2ObjectArrayMap;
 import org.spongepowered.asm.mixin.Final;
@@ -37,10 +38,13 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import net.minecraft.client.world.BiomeColorCache;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.util.CubicSampler;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.registry.DynamicRegistryManager;
 import net.minecraft.world.World;
+import net.minecraft.world.biome.Biome;
+import net.minecraft.world.biome.source.BiomeAccess;
 import net.minecraft.world.biome.source.BiomeCoords;
 import net.minecraft.world.level.ColorResolver;
 
@@ -79,7 +83,7 @@ public abstract class ClientWorldMixin extends World {
         var manager = this.getRegistryManager();
         return (x, y, z) -> {
             var biome = biomeAccess.getBiomeForNoiseGen(x, y, z);
-            return Vec3d.unpackRgb(resolver.getColor(manager, biome, BiomeCoords.toBlock(x), BiomeCoords.toBlock(y), BiomeCoords.toBlock(z)));
+            return Vec3d.unpackRgb(resolver.getColor(manager, biome.value(), BiomeCoords.toBlock(x), BiomeCoords.toBlock(y), BiomeCoords.toBlock(z)));
         };
     }
 

@@ -31,6 +31,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.world.ClientWorld;
+import net.minecraft.util.registry.DynamicRegistryManager;
 
 @Mixin(MinecraftClient.class)
 public abstract class MinecraftClientMixin {

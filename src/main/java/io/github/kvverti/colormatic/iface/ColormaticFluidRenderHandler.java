@@ -25,6 +25,7 @@ import io.github.kvverti.colormatic.colormap.BiomeColormaps;
 import org.jetbrains.annotations.Nullable;
 
 import net.fabricmc.fabric.api.client.render.fluid.v1.FluidRenderHandler;
+import net.minecraft.block.BlockState;
 import net.minecraft.client.texture.Sprite;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.util.math.BlockPos;

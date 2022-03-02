@@ -21,12 +21,6 @@
  */
 package io.github.kvverti.colormatic.properties;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.registry.BuiltinRegistries;
@@ -35,6 +29,11 @@ import net.minecraft.util.registry.Registry;
 import net.minecraft.util.registry.RegistryKey;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.BiomeKeys;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public final class DefaultColumns {
 
@@ -156,7 +155,7 @@ public final class DefaultColumns {
         dynamicColumns.clear();
         if(manager != null) {
             var biomeRegistry = manager.get(Registry.BIOME_KEY);
-            for(var entry : biomeRegistry.getEntries()) {
+            for(var entry : biomeRegistry.getEntrySet()) {
                 var key = entry.getKey();
                 if(!currentColumns.containsKey(key.getValue())) {
                     dynamicColumns.put(key.getValue(), computeClosestDefaultBiome(key, biomeRegistry));

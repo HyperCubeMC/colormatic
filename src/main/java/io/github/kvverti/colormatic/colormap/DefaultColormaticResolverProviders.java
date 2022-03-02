@@ -27,6 +27,8 @@ import io.github.kvverti.colormatic.mixin.color.BlockColorsAccessor;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.color.block.BlockColorProvider;
+import net.minecraft.client.world.ClientWorld;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
